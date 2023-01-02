@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using mvcAuthentication.Models.Context;
 using mvcAuthentication.Models.Entities;
 
@@ -10,7 +11,7 @@ namespace mvcAuthentication.Controllers
         Context db = new Context();
         public IActionResult Index()
         {
-            return View(db.Personels.ToList());
+            return View(db.Personels.Include(x=>x.Department).ToList());
         }
 
         public  IActionResult Create()
